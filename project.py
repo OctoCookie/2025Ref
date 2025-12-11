@@ -22,7 +22,7 @@ pipelines.py
 
 import os
 import glob
-
+import argparse
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -726,19 +726,60 @@ def run_vibration_fault_pipeline(
 
 
 # ============================================================================
-# 3. Простий CLI для запуску
+# 3. CLI для запуску
 # ============================================================================
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        add_help=False,
+        description="Система прогнозного техобслуговування",
+        epilog=" Приклад запуску: python project.py --dataset nasa"
+    )
+ 
+    parser.add_argument(
+    "-h", "--help",
+    action="help",
+    help="Показати довідку щодо параметрів запуску"
+    )
+    
+    parser.add_argument(
+        "--dataset",
+        choices=["nasa", "vibration", "both"],
+        default="both",
+        help="Запустити, АБО тільки NASA, АБО тільки вібрації, АБО обидва пайплайни"
+    )
 
-    # Приклад для NASA:
-    nasa_base = r"C:/Users/Admin/1112/kaggle"
-    nasa_results = run_nasa_rul_pipeline(nasa_base)
+    parser.add_argument(
+        "--nasa-path",
+        type=str,
+        default=r"C:/Users/Admin/1112/kaggle",
+        help="Шлях до папки з файлами train_FD00x.txt / test_FD00x.txt / RUL_FD00x.txt"
+    )
 
-    # Приклад для вібрацій:
-    healthy_dir = r"C:/Users/Admin/1112/kaggle2/Healthy"
-    faulty_dir = r"C:/Users/Admin/1112/kaggle2/Faulty"
-    vib_results = run_vibration_fault_pipeline(healthy_dir, faulty_dir)
+    parser.add_argument(
+        "--healthy-path",
+        type=str,
+        default=r"C:/Users/Admin/1112/kaggle2/Healthy",
+        help="Папка з *.mat файлами для Healthy станів"
+    )
+
+    parser.add_argument(
+        "--faulty-path",
+        type=str,
+        default=r"C:/Users/Admin/1112/kaggle2/Faulty",
+        help="Папка з *.mat файлами для Faulty станів"
+    )
+
+    args = parser.parse_args()
+
+    # --- Запуск обраних пайплайнів ---
+    if args.dataset in ("nasa", "both"):
+        print("\n=== Запуск RUL пайплайна ===")
+        nasa_results = run_nasa_rul_pipeline(args.nasa_path)
+
+    if args.dataset in ("vibration", "both"):
+        print("\n=== Запуск вібраційного пайплайна ===")
+        vib_results = run_vibration_fault_pipeline(args.healthy_path, args.faulty_path)
 
 
 # In[ ]:
