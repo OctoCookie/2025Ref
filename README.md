@@ -60,7 +60,7 @@
 | Клас / Файл                      | Призначення                                                                                                |
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | `pipeline.py`                    | Головний файл, містить програму                                                                            |
-| `run_nasa_rul_pipeline()`        | ФФункція для повного циклу обробки NASA датасету: передобробка, моделювання, калібрування, оцінка          |
+| `run_nasa_rul_pipeline()`        | Функція для повного циклу обробки NASA датасету: передобробка, моделювання, калібрування, оцінка           |
 | `run_vibration_fault_pipeline()` | Функція реалізації повного пайплайна для вібраційних даних: фільтрація, ознаки, класифікація, калібрування |
 | `isotonic_calibrate()`           | Побудова моделі ізотонічної регресії для калібрування                                                      |
 | `linear_calibrate()`             | Функція лінійної калібровки прогнозу                                                                       |
@@ -90,18 +90,18 @@ cd project-name
 
 Обидва пайплайни одночасно:
 
--   python ./project-path/project.py --dataset both
+-   python ./project-folder/project.py --dataset both
 
 Або просто
 
--   python ./project-path/project.py
+-   python ./project-folder/project.py
 
 Лише RUL пайплайн:
 
 -   python pipelines.py --dataset nasa
     (візьме прописаний --nasa-path)
 
-Або з власним шляхом до даних:
+Або RUL пайплайн з власним шляхом до даних:
 
 -   python pipelines.py --dataset nasa --nasa-path "… /project-folder/kaggle"
 
@@ -109,11 +109,9 @@ cd project-name
 
 -   python pipelines.py --dataset vibration
 
-Або з власними шляхами до даних:
+Або вібраційний пайплайн з власними шляхами до даних:
 
--   python pipelines.py --dataset vibration ^
-    --healthy-path "… /project-folder/kaggle1/Healthy" ^
-    --faulty-path "… /project-folder/kaggle1/Faulty"
+-   python pipelines.py --dataset vibration --healthy-path "… /project-folder/kaggle1/Healthy" --faulty-path "… /project-folder/kaggle1/Faulty"
 
 ---
 
