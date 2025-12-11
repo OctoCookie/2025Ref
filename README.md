@@ -89,24 +89,31 @@ cd project-name
 ### 3. Запуск
 
 Обидва пайплайни одночасно:
-python ./project-path/project.py --dataset both
+
+-   python ./project-path/project.py --dataset both
+
 Або просто
-python ./project-path/project.py
+
+-   python ./project-path/project.py
 
 Лише RUL пайплайн:
-python pipelines.py --dataset nasa
-(візьме прописаний --nasa-path)
+
+-   python pipelines.py --dataset nasa
+    (візьме прописаний --nasa-path)
 
 Або з власним шляхом до даних:
-python pipelines.py --dataset nasa --nasa-path "… /project-folder/kaggle"
+
+-   python pipelines.py --dataset nasa --nasa-path "… /project-folder/kaggle"
 
 Лише вібраційний пайплайн:
-python pipelines.py --dataset vibration
+
+-   python pipelines.py --dataset vibration
 
 Або з власними шляхами до даних:
-python pipelines.py --dataset vibration ^
---healthy-path "… /project-folder/kaggle1/Healthy" ^
---faulty-path "… /project-folder/kaggle1/Faulty"
+
+-   python pipelines.py --dataset vibration ^
+    --healthy-path "… /project-folder/kaggle1/Healthy" ^
+    --faulty-path "… /project-folder/kaggle1/Faulty"
 
 ---
 
