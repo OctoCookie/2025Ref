@@ -51,6 +51,14 @@ from sklearn.calibration import calibration_curve
 
 from xgboost import XGBRegressor, XGBClassifier
 
+from pathlib import Path
+
+# Папка, де лежить project.py
+BASE_PATH = Path(__file__).resolve().parent
+# Шляхи за замовчуванням відносно репозиторію
+DEFAULT_NASA_PATH = BASE_PATH / "kaggle"
+DEFAULT_HEALTHY_PATH = BASE_PATH / "kaggle2" / "Healthy"
+DEFAULT_FAULTY_PATH = BASE_PATH / "kaggle2" / "Faulty"
 
 # ============================================================================
 # 0. Загальні допоміжні функції
@@ -752,21 +760,21 @@ if __name__ == "__main__":
     parser.add_argument(
         "--nasa-path",
         type=str,
-        default=r"C:/Users/Admin/1112/kaggle",
+        default=str(DEFAULT_NASA_PATH),
         help="Шлях до папки з файлами train_FD00x.txt / test_FD00x.txt / RUL_FD00x.txt"
     )
 
     parser.add_argument(
         "--healthy-path",
         type=str,
-        default=r"C:/Users/Admin/1112/kaggle2/Healthy",
+        default=str(DEFAULT_HEALTHY_PATH),
         help="Папка з *.mat файлами для Healthy станів"
     )
 
     parser.add_argument(
         "--faulty-path",
         type=str,
-        default=r"C:/Users/Admin/1112/kaggle2/Faulty",
+        default=str(DEFAULT_FAULTY_PATH),
         help="Папка з *.mat файлами для Faulty станів"
     )
 
